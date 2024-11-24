@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="et"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="logoo.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="styles/site.webmanifest">
+    <script src="js/alpine.min.js" defer=""></script>
+    <script src="js/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/pagination.min.js"></script>
+    <script src="js/underscore-min.js" type="text/javascript"></script>
+    <title>SPECTRUM UCP</title>
+    <style>
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        #muteButton {
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .bg-video {
+                object-position: center center;
+            }
+            #muteButton {
+                top: 10px;
+                left: 10px;
+            }
+            .login-btn {
+                width: 80%;
+            }
+            .social-icons img {
+                width: 36px;
+                height: 36px;
+            }
+            .social-icons a {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden">
+    <!-- Background Video -->
+    <video id="bg-video" class="bg-video" autoplay="" muted="" loop="">
+        <source src="media/videooo.mp4" type="video/mp4">
+        Teie brauser ei toeta video elemente.
+    </video>
+
+    <!-- Mute/Play Button -->
+    <button id="muteButton" onclick="toggleMute()" class="absolute top-5 left-5 bg-gray-800 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-700 transition duration-150">
+        Mängi heli
+    </button>
+
+    <div class="flex items-center justify-center h-full flex-col relative">
+        <!-- Main Logo -->
+        <div class="flex justify-center w-full mb-8">
+            <img src="images/logo.png" alt="RelaxLife logo" class="w-72 h-auto">
+        </div>
+
+        <!-- Login Buttons -->
+        <div class="flex flex-col items-center space-y-4">
+            <a href="init-openId.php" class="login-btn py-3 px-12 flex justify-center items-center bg-gray-600 hover:bg-gray-700 text-white w-full text-lg font-semibold shadow-md rounded-lg transition ease-in duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 mr-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"></path>
+                </svg> 
+                <span>Logi sisse Steamiga</span>
+            </a>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="absolute bottom-1 right-10 flex space-x-8 items-center social-icons">
+            <div class="flex flex-col items-center">
+                <img src="images/b584b1776f49b350c54e5172f9a1f102.jpg" alt="Discord Logo" class="w-12 h-12">
+                <a href="https://discord.gg/c59ppyGYnd" target="_blank" class="text-white text-lg font-semibold mt-2">Discord</a>
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="images/480px-Instagram_logo.png" alt="Instagram Logo" class="w-12 h-12">
+                <a href="https://www.instagram.com/" target="_blank" class="text-white text-lg font-semibold mt-2">Instagram</a>
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="images/Tiktok_icon.svg" alt="Tiktok Logo" class="w-12 h-12">
+                <a href="https://www.tiktok.com/@relaxliferlp" target="_blank" class="text-white text-lg font-semibold mt-2">TikTok</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center p-4 bg-transparent text-white absolute bottom-0 left-0 w-full">
+    <p>© 2024 SPECTRUM. Kõik õigused kaitstud.</p>
+    </footer>
+
+    <script>
+        const video = document.getElementById("bg-video");
+        const muteButton = document.getElementById("muteButton");
+
+        video.muted = true;
+
+        function toggleMute() {
+            if (video.paused) {
+                video.play().then(() => {
+                    video.muted = false;
+                    muteButton.textContent = "Vaigista heli";
+                }).catch(error => {
+                    console.error("Video ei saanud alustada automaatselt:", error);
+                });
+            } else {
+                video.muted = !video.muted;
+                muteButton.textContent = video.muted ? "Mängi heli" : "Vaigista heli";
+            }
+        }
+    </script>
+
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+    </script>
+    <script>
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode === 123) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+
+</body></html>
